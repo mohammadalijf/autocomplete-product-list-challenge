@@ -38,6 +38,11 @@ const useSearchPageStyles = makeStyles((theme) => ({
   saleInput: {
     gridArea: "onSaleInput",
   },
+  pagination: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
 export default useSearchPageStyles;

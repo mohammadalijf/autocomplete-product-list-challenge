@@ -1,4 +1,5 @@
 import { Container, debounce, Typography } from "@material-ui/core";
+import { Pagination, PaginationProps } from "@material-ui/lab";
 import {
   FormEventHandler,
   FunctionComponent,
@@ -22,22 +23,27 @@ import SearchProductGrid from "./components/SearchProductGrid";
 import useSearchPageStyles from "./styles";
 
 /**
- * Debounced Function for setting query state
- * to avoid unnecessary filter actions dispatch
- */
-const debounced = debounce(
-  (setQuery: React.Dispatch<React.SetStateAction<string>>, query: string) => {
-    setQuery(query);
-  },
-  500
-);
-
-/**
  * Container for searching products
  */
 const SearchPage: FunctionComponent = (props) => {
   const classes = useSearchPageStyles();
   const dispatch = useAppDispatch();
+
+  /**
+   * Debounced Function for setting query state
+   * to avoid unnecessary filter actions dispatch
+   */
+  const debounced = useMemo(() => {
+    return debounce(
+      (
+        setQuery: React.Dispatch<React.SetStateAction<string>>,
+        query: string
+      ) => {
+        setQuery(query);
+      },
+      500
+    );
+  }, []);
 
   //#region store selectors
 
@@ -53,6 +59,7 @@ const SearchPage: FunctionComponent = (props) => {
   const [searchInputValue, setSearchInputValue] = useState("");
   const [gender, setGender] = useState<GenderInputOption | undefined>();
   const [onlyOnSales, setOnlyOnSales] = useState(false);
+  const [page, setPage] = useState(1);
 
   //#endregion
 
@@ -66,7 +73,7 @@ const SearchPage: FunctionComponent = (props) => {
       setSearchInputValue(query);
       debounced(setQuery, query);
     },
-    [setSearchInputValue, setQuery]
+    [debounced, setSearchInputValue, setQuery]
   );
 
   /**
@@ -96,6 +103,13 @@ const SearchPage: FunctionComponent = (props) => {
     event.preventDefault();
   };
 
+  const paginationChangeHandler: PaginationProps["onChange"] = (
+    event,
+    value
+  ) => {
+    setPage(value);
+  };
+
   //#endregion
 
   //#region side effects
@@ -114,12 +128,31 @@ const SearchPage: FunctionComponent = (props) => {
     };
   }, [query, gender, onlyOnSales, dispatch]);
 
-  const { showInstructions } = useMemo(() => {
+  useEffect(() => {
+    // set page to 1 when products change
+    setPage(1);
+  }, [filteredProducts.length, setPage]);
+
+  useEffect(() => {
+    // scroll to top when page is changed
+    window.scrollTo({
+      top: 0,
+    });
+  }, [page]);
+
+  const { showInstructions, pageCount } = useMemo(() => {
     return {
+      // should show search instructions
       showInstructions:
         !loading && query === "" && filteredProducts.length === 0,
+      // calculate page count
+      pageCount: Math.ceil(filteredProducts.length / 100),
     };
   }, [filteredProducts.length, query, loading]);
+
+  const paginatedProducts = useMemo(() => {
+    return filteredProducts.slice((page - 1) * 100, 100 * page);
+  }, [filteredProducts, page]);
 
   //#endregion
 
@@ -154,8 +187,18 @@ const SearchPage: FunctionComponent = (props) => {
         loading={loading}
         error={error}
         showInstructions={showInstructions}
-        products={filteredProducts}
+        products={paginatedProducts}
       />
+      {pageCount > 1 && (
+        <Pagination
+          data-testid="productPagination"
+          className={classes.pagination}
+          color="primary"
+          count={pageCount}
+          page={page}
+          onChange={paginationChangeHandler}
+        />
+      )}
     </Container>
   );
 };
