@@ -89,9 +89,11 @@ const productSlice = createSlice({
     });
     builder.addCase(searchProducts.fulfilled, (state, action) => {
       state.filtered = action.payload;
+      state.error.filtered = undefined;
       state.loading.filtered = false;
     });
     builder.addCase(searchProducts.rejected, (state, action) => {
+      state.filtered = [];
       state.error.filtered = action.error.message;
       state.loading.filtered = false;
     });
