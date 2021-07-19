@@ -1,5 +1,7 @@
+import { ICSVProducts } from "../../../../services/productsAPI";
+
 export type SearchProductGridProps = {
-  products: any[];
+  products: ICSVProducts[];
   showInstructions?: boolean;
-  showEmpty?: boolean;
+  error?: string;
 };

@@ -1,4 +1,4 @@
-import { Container, Typography } from "@material-ui/core";
+import { Container, debounce, Typography } from "@material-ui/core";
 import {
   FormEventHandler,
   FunctionComponent,
@@ -16,20 +16,42 @@ import { OnSaleSwitchChangeEvent } from "../../components/OnSaleSwitch/props";
 import SearchInput, {
   SearchInputChangeEvent,
 } from "../../components/SearchInput";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { searchProducts } from "../../reducers/products";
 import SearchProductGrid from "./components/SearchProductGrid";
 import useSearchPageStyles from "./styles";
+
+/**
+ * Debounced Function for setting query state
+ * to avoid unnecessary filter actions dispatch
+ */
+const debounced = debounce(
+  (setQuery: React.Dispatch<React.SetStateAction<string>>, query: string) => {
+    setQuery(query);
+  },
+  500
+);
 
 /**
  * Container for searching products
  */
 const SearchPage: FunctionComponent = (props) => {
   const classes = useSearchPageStyles();
-  const products: any[] = [];
+  const dispatch = useAppDispatch();
+
+  //#region store selectors
+
+  const filteredProducts = useAppSelector((state) => state.products.filtered);
+  const loading = useAppSelector((state) => state.products.loading.filtered);
+  const error = useAppSelector((state) => state.products.error.filtered);
+
+  //#endregion
 
   //#region states
 
   const [query, setQuery] = useState("");
-  const [gender, setGender] = useState(GenderInputOption.Unisex);
+  const [searchInputValue, setSearchInputValue] = useState("");
+  const [gender, setGender] = useState<GenderInputOption | undefined>();
   const [onlyOnSales, setOnlyOnSales] = useState(false);
 
   //#endregion
@@ -41,9 +63,10 @@ const SearchPage: FunctionComponent = (props) => {
    */
   const queryChangeHandler: SearchInputChangeEvent = useCallback(
     (query) => {
-      setQuery(query);
+      setSearchInputValue(query);
+      debounced(setQuery, query);
     },
-    [setQuery]
+    [setSearchInputValue, setQuery]
   );
 
   /**
@@ -77,14 +100,26 @@ const SearchPage: FunctionComponent = (props) => {
 
   //#region side effects
 
-  useEffect(() => {}, [query, gender, onlyOnSales]);
-
-  const { showInstructions, showEmptyGrid } = useMemo(() => {
-    return {
-      showInstructions: query === "" && products.length === 0,
-      showEmptyGrid: query !== "" && products.length === 0,
+  useEffect(() => {
+    // dispatch filter action when queries are changed
+    const promise = dispatch(
+      searchProducts({
+        query,
+        onSale: onlyOnSales,
+        gender,
+      })
+    );
+    return () => {
+      promise.abort();
     };
-  }, [products.length, query]);
+  }, [query, gender, onlyOnSales, dispatch]);
+
+  const { showInstructions } = useMemo(() => {
+    return {
+      showInstructions:
+        !loading && query === "" && filteredProducts.length === 0,
+    };
+  }, [filteredProducts.length, query, loading]);
 
   //#endregion
 
@@ -101,7 +136,7 @@ const SearchPage: FunctionComponent = (props) => {
         <SearchInput
           autoFocus
           className={classes.searchInput}
-          value={query}
+          value={searchInputValue}
           onChange={queryChangeHandler}
         />
         <GenderInput
@@ -117,8 +152,8 @@ const SearchPage: FunctionComponent = (props) => {
       </form>
       <SearchProductGrid
         showInstructions={showInstructions}
-        showEmpty={showEmptyGrid}
-        products={[]}
+        error={error}
+        products={filteredProducts}
       />
     </Container>
   );
