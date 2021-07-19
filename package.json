@@ -4,6 +4,7 @@
   "private": false,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.0.0",
@@ -53,7 +54,8 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "comlink-loader*": "<rootDir>/__mocks__/workerMock.ts"
+      "comlink-loader*": "<rootDir>/__mocks__/workerMock.ts",
+      "productsAPI": "<rootDir>/__mocks__/productAPIMocks.ts"
     }
   }
 }
