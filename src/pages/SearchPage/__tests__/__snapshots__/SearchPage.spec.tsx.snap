@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchPage /> renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiContainer-root makeStyles-container-1 MuiContainer-maxWidthLg"
+  >
+    <h1
+      class="MuiTypography-root MuiTypography-h3"
+    >
+      Autocomplete Product List Challenge
+    </h1>
+    <form
+      action="."
+      class="makeStyles-searchForm-2"
+    >
+      <div
+        class="MuiFormControl-root MuiTextField-root makeStyles-searchInput-3"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined Mui-focused Mui-focused"
+          data-shrink="true"
+        >
+          Search
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root Mui-focused Mui-focused MuiInputBase-formControl"
+        >
+          <input
+            aria-invalid="false"
+            autocomplete="products"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputTypeSearch"
+            data-testid="searchInput"
+            type="search"
+            value=""
+          />
+          <fieldset
+            aria-hidden="true"
+            class="PrivateNotchedOutline-root-7 MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="PrivateNotchedOutline-legendLabelled-9 PrivateNotchedOutline-legendNotched-10"
+            >
+              <span>
+                Search
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined"
+          data-shrink="false"
+          id="gender-input-label"
+        >
+          Gender
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root makeStyles-genderInput-4 MuiInputBase-formControl"
+        >
+          <select
+            aria-invalid="false"
+            class="MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+            data-testid="genderInput"
+            id="gender-input"
+          >
+            <option
+              aria-label="None"
+            />
+            <option
+              value="unisex"
+            >
+              Unisex
+            </option>
+            <option
+              value="female"
+            >
+              Female
+            </option>
+            <option
+              value="male"
+            >
+              Male
+            </option>
+          </select>
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="PrivateNotchedOutline-root-7 MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="PrivateNotchedOutline-legendLabelled-9"
+            >
+              <span>
+                Gender
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <label
+        class="MuiFormControlLabel-root"
+      >
+        <span
+          class="MuiSwitch-root makeStyles-genderInput-4"
+        >
+          <span
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-11 MuiSwitch-switchBase MuiSwitch-colorPrimary"
+            data-testid="onSaleSwitch"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <input
+                aria-label="show only on sales products"
+                class="PrivateSwitchBase-input-14 MuiSwitch-input"
+                type="checkbox"
+                value=""
+              />
+              <span
+                class="MuiSwitch-thumb"
+              />
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </span>
+          <span
+            class="MuiSwitch-track"
+          />
+        </span>
+        <span
+          class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+        >
+          Show only on sales
+        </span>
+      </label>
+    </form>
+    <section
+      class="makeStyles-container-15 makeStyles-centered-16"
+      data-testid="searchProductGrid"
+    >
+      <p
+        class="MuiTypography-root makeStyles-instructionsLabel-17 MuiTypography-body1"
+      >
+        Start searching for products by typing in the search box
+      </p>
+    </section>
+  </div>
+</DocumentFragment>
+`;

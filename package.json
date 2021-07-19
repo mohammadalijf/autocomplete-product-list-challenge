@@ -4,18 +4,21 @@
   "private": false,
   "dependencies": {
     "@material-ui/core": "^4.12.1",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.1.9",
     "@types/jest": "^26.0.15",
     "@types/node": "^16.3.2",
-    "@types/react-dom": "^17.0.0",
     "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "comlink-loader": "^2.0.0",
+    "papaparse": "^5.3.1",
+    "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
-    "react": "^17.0.2",
     "typescript": "^4.1.2",
     "web-vitals": "^2.1.0"
   },
@@ -45,7 +48,14 @@
     ]
   },
   "devDependencies": {
+    "@types/papaparse": "^5.2.6",
     "cypress": "^7.7.0",
     "prettier": "2.3.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "comlink-loader*": "<rootDir>/__mocks__/workerMock.ts",
+      "productsAPI": "<rootDir>/__mocks__/productAPIMocks.ts"
+    }
   }
 }
