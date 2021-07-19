@@ -1,4 +1,10 @@
 import { SelectProps } from "@material-ui/core";
+import { CSVProductGender } from "../../services/productsAPI";
+
+/**
+ * GenderInput available options
+ */
+export { CSVProductGender as GenderInputOption };
 
 export interface IGenderInputProps {
   /**
@@ -8,23 +14,14 @@ export interface IGenderInputProps {
   /**
    * selected value for option
    */
-  value?: GenderInputOption;
-}
-
-/**
- * GenderInput available options
- */
-export enum GenderInputOption {
-  Unisex = "unisex",
-  Female = "female",
-  Male = "male",
+  value?: CSVProductGender;
 }
 
 /**
  * Event handler for GenderInput when option value changes
  * @param option: selected GenderInputOption
  */
-export type GenderInputChangeEvent = (option: GenderInputOption) => void;
+export type GenderInputChangeEvent = (option: CSVProductGender) => void;
 
 /**
  * GenderInputs' props mixed with SelectProps

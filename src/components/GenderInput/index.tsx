@@ -12,12 +12,12 @@ import {
  */
 const GenderInput: FunctionComponent<GenderInputProps> = ({
   onChange,
-  value = GenderInputOption.Unisex,
+  value,
   ...props
 }) => {
   //#region
 
-  const changeHandler: SelectInputProps["onChange"] = (event, child) => {
+  const changeHandler: SelectInputProps["onChange"] = (event) => {
     onChange?.(event.target.value as GenderInputOption);
   };
 
@@ -35,6 +35,7 @@ const GenderInput: FunctionComponent<GenderInputProps> = ({
         inputProps={{ ...props.inputProps, "data-testid": "genderInput" }}
         onChange={changeHandler}
       >
+        <option aria-label="None" />
         <option value={GenderInputOption.Unisex}>Unisex</option>
         <option value={GenderInputOption.Female}>Female</option>
         <option value={GenderInputOption.Male}>Male</option>
