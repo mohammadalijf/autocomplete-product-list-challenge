@@ -16,9 +16,9 @@ const useSearchProductGridStyles = makeStyles((theme) => ({
     },
   },
   centered: {
-    display: "flex",
+    gridTemplateColumns: "1fr",
     alignItems: "center",
-    justifyContent: "center",
+    justifyItems: "center",
   },
   instructionsLabel: { textAlign: "center" },
 }));

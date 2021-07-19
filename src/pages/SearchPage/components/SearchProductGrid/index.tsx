@@ -16,7 +16,7 @@ const SearchProductGrid: FunctionComponent<SearchProductGridProps> = ({
   return (
     <section
       data-testid="searchProductGrid"
-      className={clsx(classes.container, { [classes.centered]: loading })}
+      className={clsx(classes.container, { [classes.centered]: loading || showInstructions || error })}
     >
       {showInstructions && (
         <Typography className={classes.instructionsLabel}>
