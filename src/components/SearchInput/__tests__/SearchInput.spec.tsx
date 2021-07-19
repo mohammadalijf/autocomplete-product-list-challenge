@@ -13,6 +13,10 @@ describe("<SearchInput />", () => {
       searchInput = render(<SearchInput onChange={onChange} />);
     });
 
+    it("renders correctly", async () => {
+      expect(searchInput.asFragment()).toMatchSnapshot();
+    });
+
     it("calls the onChange handler with typed string", async () => {
       userEvent.type(searchInput.getByTestId("searchInput"), "hello");
       expect(onChange).toHaveBeenCalledWith("hello");

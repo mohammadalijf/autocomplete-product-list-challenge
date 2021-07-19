@@ -12,6 +12,10 @@ describe("<GenderInput />", () => {
       genderInput = render(<GenderInput value={value} />);
     });
 
+    it("renders correctly", async () => {
+      expect(genderInput.asFragment()).toMatchSnapshot();
+    });
+
     it("have all the GenderInputOptions", async () => {
       Object.keys(GenderInputOption).forEach((option) => {
         expect(genderInput.getByTestId("genderInput")).toHaveTextContent(
