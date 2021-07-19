@@ -1,4 +1,5 @@
-import { Typography } from "@material-ui/core";
+import { CircularProgress, Typography } from "@material-ui/core";
+import clsx from "clsx";
 import { FunctionComponent } from "react";
 import SearchProductCell from "../SearchProductCell";
 import { SearchProductGridProps } from "./props";
@@ -8,11 +9,15 @@ const SearchProductGrid: FunctionComponent<SearchProductGridProps> = ({
   products,
   showInstructions,
   error,
+  loading,
   ...props
 }) => {
   const classes = useSearchProductGridStyles();
   return (
-    <section data-testid="searchProductGrid">
+    <section
+      data-testid="searchProductGrid"
+      className={clsx(classes.container, { [classes.centered]: loading })}
+    >
       {showInstructions && (
         <Typography className={classes.instructionsLabel}>
           Start searching for products by typing in the search box
@@ -21,6 +26,7 @@ const SearchProductGrid: FunctionComponent<SearchProductGridProps> = ({
       {error && (
         <Typography className={classes.instructionsLabel}>{error}</Typography>
       )}
+      {loading && <CircularProgress />}
       {products.map((item) => (
         <SearchProductCell key={item.gtin} product={item} />
       ))}

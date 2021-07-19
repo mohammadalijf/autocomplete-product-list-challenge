@@ -151,8 +151,9 @@ const SearchPage: FunctionComponent = (props) => {
         />
       </form>
       <SearchProductGrid
-        showInstructions={showInstructions}
+        loading={loading}
         error={error}
+        showInstructions={showInstructions}
         products={filteredProducts}
       />
     </Container>

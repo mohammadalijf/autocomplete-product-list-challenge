@@ -4,4 +4,5 @@ export type SearchProductGridProps = {
   products: ICSVProducts[];
   showInstructions?: boolean;
   error?: string;
+  loading?: boolean;
 };
