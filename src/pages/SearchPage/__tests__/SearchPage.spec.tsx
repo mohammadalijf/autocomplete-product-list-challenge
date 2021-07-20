@@ -4,7 +4,7 @@ import {
   render,
   RenderResult,
 } from "@testing-library/react";
-import { act, createRenderer } from "react-dom/test-utils";
+import { act } from "react-dom/test-utils";
 import { Provider } from "react-redux";
 import SearchPage from "..";
 import { fetchProducts } from "../../../reducers/products";
@@ -28,7 +28,21 @@ describe("<SearchPage />", () => {
     expect(searchPage.asFragment()).toMatchSnapshot();
   });
 
-  it("should show correct information", async () => {
+  it("should show correct products", async () => {
+    const searchInput = searchPage.getByTestId("searchInput");
+    searchInput.focus();
+    await act(async () => {
+      fireEvent.change(searchPage.getByTestId("searchInput"), {
+        target: { value: "slim" },
+      });
+      // for debounced Change event in search input
+      await new Promise((r) => setTimeout(r, 500));
+    });
+
+    expect(searchPage.queryAllByTestId("productCell")).toHaveLength(100);
+  });
+
+  it("should show pagination", async () => {
     const searchInput = searchPage.getByTestId("searchInput");
     searchInput.focus();
     await act(async () => {
@@ -38,9 +52,12 @@ describe("<SearchPage />", () => {
       await new Promise((r) => setTimeout(r, 500));
     });
 
-    expect(searchPage.queryAllByTestId("productCell")).toHaveLength(100);
     expect(
       searchPage.getByTestId("productPagination").getElementsByTagName("li")
     ).toHaveLength(5);
+  });
+
+  it("should not show pagination when search is empty", async () => {
+    expect(searchPage.queryAllByTestId("productPagination")).toHaveLength(0);
   });
 });
