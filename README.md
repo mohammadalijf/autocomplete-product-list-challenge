@@ -62,7 +62,7 @@ service workers are only available in production builds on **HTTPS**. To run app
 
 ## Image Caches
 
-This projects uses service workers for caching app bundle and product images. if you run app in HTTPS production mode the image cache will to its magic. please refer to [this section](#running-the-production-build-on-https-localhost) on how to run production on localhost using https.
+This projects uses service workers for caching app bundle and product images. if you run app in HTTPS production mode the image cache will do its magic. please refer to [this section](#running-the-production-build-on-https-localhost) on how to run production on localhost using https. For checking cached images or cleaning them use **Google Chrome DevTools**. in **Application** tab under **Cache Storage** check **product-image**.
 
 ## Attribution
 
