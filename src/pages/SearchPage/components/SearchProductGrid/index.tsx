@@ -5,6 +5,9 @@ import SearchProductCell from "../SearchProductCell";
 import { SearchProductGridProps } from "./props";
 import useSearchProductGridStyles from "./styles";
 
+/**
+ * Component to show search results for products in a grid
+ */
 const SearchProductGrid: FunctionComponent<SearchProductGridProps> = ({
   products,
   showInstructions,
@@ -16,7 +19,9 @@ const SearchProductGrid: FunctionComponent<SearchProductGridProps> = ({
   return (
     <section
       data-testid="searchProductGrid"
-      className={clsx(classes.container, { [classes.centered]: loading || showInstructions || error })}
+      className={clsx(classes.container, {
+        [classes.centered]: loading || showInstructions || error,
+      })}
     >
       {showInstructions && (
         <Typography className={classes.instructionsLabel}>

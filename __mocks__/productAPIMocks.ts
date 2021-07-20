@@ -1,7 +1,25 @@
 /**
+ * queries used to filter products
+ */
+export interface IProductQuery {
+  /**
+   * query string to check in title and gtin
+   */
+  query?: string;
+  /**
+   * query products with this gender
+   */
+  gender?: CSVProductGender;
+  /**
+   * query products which are on sale
+   */
+  onSale?: boolean;
+}
+
+/**
  * products' gender from products.csv
  */
- export enum CSVProductGender {
+export enum CSVProductGender {
   Unisex = "unisex",
   Female = "female",
   Male = "male",
@@ -26,7 +44,6 @@ export interface ICSVProducts {
  * @returns All the products in products.csv as array of ICSVProduct
  */
 async function fetchProducts(): Promise<ICSVProducts[]> {
-  
   return [
     {
       title: "Weekday THURSDAY Jeans Slim Fit black",
@@ -3415,13 +3432,13 @@ async function fetchProducts(): Promise<ICSVProducts[]> {
 /**
  * Filters Products base on query on their title or gtin, and gender and onSale
  * @param products initial product sets to apply filters on
- * @param queries query object that may contain query, onSale, gender
+ * @param queries queries used to filter products
  * @param signal abort signal for canceling the thread and process
  * @returns an array of products that passed the filtering
  */
 async function searchProducts(
   products: ICSVProducts[],
-  queries: { query?: string; gender?: CSVProductGender; onSale?: boolean },
+  queries: IProductQuery,
   signal?: AbortSignal
 ): Promise<ICSVProducts[]> {
   return products;
