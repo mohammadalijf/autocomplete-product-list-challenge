@@ -24,5 +24,3 @@ serviceWorkerRegistration.register();
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-console.log(new URL("https://mosaic01.ztat.net/vgs/media/large/TF/32/1S/00/0N/11/TF321S000-N11@12.jpg").origin)
