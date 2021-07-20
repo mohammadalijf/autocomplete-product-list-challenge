@@ -2,6 +2,9 @@ import { FormControlLabel, Switch, SwitchProps } from "@material-ui/core";
 import { FunctionComponent } from "react";
 import { OnSaleSwitchProps } from "./props";
 
+/**
+ * Component selecting OnSale state
+ */
 const OnSaleSwitch: FunctionComponent<OnSaleSwitchProps> = ({
   onChange,
   checked,

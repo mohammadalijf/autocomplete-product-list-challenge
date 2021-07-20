@@ -1,5 +1,6 @@
 import { parse as csvParser } from "papaparse";
 import ProductFilteringWorker from "../../worker/ProductFilteringWorker";
+import { IProductQuery } from "./parameters/IProductQuery";
 import { ICSVProducts, CSVProductGender } from "./responses/ICSVProducs";
 
 /**
@@ -46,7 +47,7 @@ async function fetchProducts(): Promise<ICSVProducts[]> {
  */
 async function searchProducts(
   products: ICSVProducts[],
-  queries: { query?: string; gender?: CSVProductGender; onSale?: boolean },
+  queries: IProductQuery,
   signal?: AbortSignal
 ): Promise<ICSVProducts[]> {
   // init a new worker

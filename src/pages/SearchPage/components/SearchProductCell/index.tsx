@@ -4,6 +4,9 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { SearchProductCellProps } from "./props";
 import useSearchProductCellStyles from "./styles";
 
+/**
+ * Component to display products in a cell
+ */
 const SearchProductCell: FunctionComponent<SearchProductCellProps> = ({
   product,
   ...props
@@ -13,7 +16,9 @@ const SearchProductCell: FunctionComponent<SearchProductCellProps> = ({
 
   //#region states
 
+  // boolean for cell expansion state
   const [expanded, setExpanded] = useState<boolean | undefined>(undefined);
+  // boolean for showing image instead of placeholder
   const [loadImg, setLoadImg] = useState(false);
 
   //#endregion

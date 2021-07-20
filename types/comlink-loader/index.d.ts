@@ -1,4 +1,5 @@
 declare module "comlink-loader?multi!./productFilteringWorker" {
+  import { IProductQuery } from "../../src/services/productsAPI/parameters/IProductQuery";
   import { CSVProductGender, ICSVProducts } from "./src/services/productsAPI";
 
   class ProductFilteringWorker extends Worker {
@@ -7,12 +8,12 @@ declare module "comlink-loader?multi!./productFilteringWorker" {
     /**
      * Filters Products base on query on their title or gtin, and gender and onSale
      * @param products initial product sets to apply filters on
-     * @param queries query object that may contain query, onSale, gender
+     * @param queries queries used to filter products
      * @returns an array of products that passed the filtering
      */
     filterProducts(
       products: ICSVProducts[],
-      queries: { query?: string; gender?: CSVProductGender; onSale?: boolean }
+      queries: IProductQuery
     ): Promise<ICSVProducts[]>;
 
     /**

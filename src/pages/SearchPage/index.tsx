@@ -55,10 +55,15 @@ const SearchPage: FunctionComponent = (props) => {
 
   //#region states
 
+  // query for search function
   const [query, setQuery] = useState("");
+  // value for search input
   const [searchInputValue, setSearchInputValue] = useState("");
+  // value for gender input
   const [gender, setGender] = useState<GenderInputOption | undefined>();
+  // value for onSale switch
   const [onlyOnSales, setOnlyOnSales] = useState(false);
+  // value for pagination page
   const [page, setPage] = useState(1);
 
   //#endregion
@@ -142,14 +147,21 @@ const SearchPage: FunctionComponent = (props) => {
 
   const { showInstructions, pageCount } = useMemo(() => {
     return {
-      // should show search instructions
+      /**
+       * should show search instructions
+       */
       showInstructions:
         !loading && query === "" && filteredProducts.length === 0,
-      // calculate page count
+      /**
+       * calculate page count
+       */
       pageCount: Math.ceil(filteredProducts.length / 100),
     };
   }, [filteredProducts.length, query, loading]);
 
+  /**
+   * paginated search results
+   */
   const paginatedProducts = useMemo(() => {
     return filteredProducts.slice((page - 1) * 100, 100 * page);
   }, [filteredProducts, page]);
