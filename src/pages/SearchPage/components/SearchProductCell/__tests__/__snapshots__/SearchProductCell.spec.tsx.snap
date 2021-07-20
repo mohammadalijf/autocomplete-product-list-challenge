@@ -10,8 +10,9 @@ exports[`<SearchProductCell /> renders correctly 1`] = `
       class="makeStyles-imgContainer-5"
     >
       <img
-        alt="Jeans"
+        alt="Weekday THURSDAY Jeans Slim Fit black"
         class="makeStyles-img-6"
+        data-testid="productMainImg"
         loading="lazy"
         src="/placeholder.png"
       />
@@ -20,7 +21,7 @@ exports[`<SearchProductCell /> renders correctly 1`] = `
       class="MuiTypography-root makeStyles-titleLabel-2 MuiTypography-body1"
       data-testid="productTitle"
     >
-      Jeans
+      Weekday THURSDAY Jeans Slim Fit black
     </h6>
     <div
       class="makeStyles-inforContainer-3"
@@ -35,7 +36,7 @@ exports[`<SearchProductCell /> renders correctly 1`] = `
           class="MuiTypography-root MuiTypography-caption"
           data-testid="productGTIN"
         >
-          1
+          2001007926858
         </span>
       </div>
       <div>
@@ -61,7 +62,7 @@ exports[`<SearchProductCell /> renders correctly 1`] = `
           class="MuiTypography-root MuiTypography-caption"
           data-testid="productPrice"
         >
-          20.0 EUR
+          39.95 EUR
         </span>
       </div>
       <div>
@@ -74,10 +75,25 @@ exports[`<SearchProductCell /> renders correctly 1`] = `
           class="MuiTypography-root MuiTypography-caption"
           data-testid="productSalePrice"
         >
-          20.0 EUR
+          39.95 EUR
         </span>
       </div>
     </div>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+      data-testid="moreImageButton"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        show more images
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </article>
 </DocumentFragment>
 `;

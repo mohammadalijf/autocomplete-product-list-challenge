@@ -4,18 +4,20 @@ import {
   fetchProducts,
   NotFoundProductError,
 } from "../../../../../reducers/products";
+import { ICSVProducts } from "../../../../../services/productsAPI";
 import { store } from "../../../../../store";
 
 describe("<SearchProductGrid />", () => {
   afterEach(cleanup);
+  let products: ICSVProducts[];
+
+  beforeEach(async () => {
+    await store.dispatch(fetchProducts());
+    products = store.getState().products.products.slice(0, 2);
+  });
 
   it("renders correctly", async () => {
-    await store.dispatch(fetchProducts());
-    let searchProductGrid = render(
-      <SearchProductGrid
-        products={store.getState().products.products.slice(0, 2)}
-      />
-    );
+    let searchProductGrid = render(<SearchProductGrid products={products} />);
     expect(searchProductGrid.asFragment()).toMatchSnapshot();
   });
 
@@ -33,6 +35,13 @@ describe("<SearchProductGrid />", () => {
     );
     expect(searchProductGrid.baseElement).toHaveTextContent(
       "Start searching for products by typing in the search box"
+    );
+  });
+
+  it("should show correct product count", () => {
+    let searchProductGrid = render(<SearchProductGrid products={products} />);
+    expect(searchProductGrid.queryAllByTestId("productCell")).toHaveLength(
+      products.length
     );
   });
 });
