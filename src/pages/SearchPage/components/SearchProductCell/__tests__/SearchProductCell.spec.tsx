@@ -1,4 +1,10 @@
-import { cleanup, render, RenderResult } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  RenderResult,
+} from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import SearchProductCell from "..";
 import {
   CSVProductGender,
@@ -6,54 +12,120 @@ import {
 } from "../../../../../services/productsAPI";
 
 describe("<SearchProductCell />", () => {
-  const product: ICSVProducts = {
-    title: "Jeans",
-    gtin: "1",
-    price: "20.0 EUR",
-    salePrice: "20.0 EUR",
+  let product: ICSVProducts = {
+    title: "Weekday THURSDAY Jeans Slim Fit black",
+    gtin: "2001007926858",
     gender: CSVProductGender.Female,
-    imageLink: "",
-    additionalImageLink: [],
+    salePrice: "39.95 EUR",
+    price: "39.95 EUR",
+    imageLink:
+      "https://mosaic01.ztat.net/vgs/media/large/WE/B2/1N/00/HQ/11/WEB21N00H-Q11@12.4.jpg",
+    additionalImageLink: [
+      "https://mosaic01.ztat.net/vgs/media/large/WE/B2/1N/00/HQ/11/WEB21N00H-Q11@22.jpg",
+      " https://mosaic01.ztat.net/vgs/media/large/WE/B2/1N/00/HQ/11/WEB21N00H-Q11@21.jpg",
+      " https://mosaic01.ztat.net/vgs/media/large/WE/B2/1N/00/HQ/11/WEB21N00H-Q11@20.jpg",
+      " https://mosaic01.ztat.net/vgs/media/large/WE/B2/1N/00/HQ/11/WEB21N00H-Q11@19.jpg",
+      " https://mosaic01.ztat.net/vgs/media/large/WE/B2/1N/00/HQ/11/WEB21N00H-Q11@18.jpg",
+    ],
+    onSale: false,
   };
-  let searchProductGrid: RenderResult;
 
+  let scrollIntoViewMock: jest.Mock;
+
+  let searchProductCell: RenderResult;
   afterEach(cleanup);
 
-  beforeEach(() => {
-    searchProductGrid = render(<SearchProductCell product={product} />);
+  beforeEach(async () => {
+    scrollIntoViewMock = jest.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+    searchProductCell = render(<SearchProductCell product={product} />);
   });
 
   it("renders correctly", () => {
-    expect(searchProductGrid.asFragment()).toMatchSnapshot();
+    expect(searchProductCell.asFragment()).toMatchSnapshot();
   });
 
-  it("should show correct information", () => {
-    expect(searchProductGrid.getByTestId("productTitle").textContent).toEqual(
+  it("should show correct information", async () => {
+    expect(searchProductCell.getByTestId("productMainImg")).toHaveAttribute(
+      "src",
+      "/placeholder.png"
+    );
+
+    expect(searchProductCell.getByTestId("productTitle").textContent).toEqual(
       product.title
     );
 
-    expect(searchProductGrid.getByTestId("productGTIN").textContent).toEqual(
+    expect(searchProductCell.getByTestId("productGTIN").textContent).toEqual(
       product.gtin
     );
 
-    expect(searchProductGrid.getByTestId("productPrice").textContent).toEqual(
+    expect(searchProductCell.getByTestId("productPrice").textContent).toEqual(
       product.price
     );
 
     expect(
-      searchProductGrid.getByTestId("productSalePrice").textContent
+      searchProductCell.getByTestId("productSalePrice").textContent
     ).toEqual(product.salePrice);
 
-    expect(searchProductGrid.getByTestId("productGender").textContent).toEqual(
+    expect(searchProductCell.getByTestId("productGender").textContent).toEqual(
       product.gender
     );
+  });
 
-    expect(searchProductGrid.getByRole("img").getAttribute("src")).toEqual(
-      "/placeholder.png"
+  it("should not show On Sale Badge when product is not on sale", async () => {
+    expect(searchProductCell.queryAllByTestId("saleLabel")).toHaveLength(0);
+  });
+
+  it("should show On Sale Badge when product is on sale", async () => {
+    product = {
+      title: "KIOMI Uhr navy",
+      gtin: "4054789817584",
+      gender: CSVProductGender.Female,
+      salePrice: "14.95 EUR",
+      price: "29.95 EUR",
+      imageLink:
+        "https://mosaic01.ztat.net/vgs/media/large/K4/45/1M/A0/6K/11/K4451MA06-K11@6.jpg",
+      additionalImageLink: [
+        "https://mosaic01.ztat.net/vgs/media/large/K4/45/1M/A0/6K/11/K4451MA06-K11@5.jpg",
+        " https://mosaic01.ztat.net/vgs/media/large/K4/45/1M/A0/6K/11/K4451MA06-K11@4.jpg",
+      ],
+      onSale: true,
+    };
+    searchProductCell = render(<SearchProductCell product={product} />);
+    expect(searchProductCell.queryAllByTestId("saleLabel")).toHaveLength(1);
+  });
+
+  it("should show more image button when product have additional images and show img on click", async () => {
+    expect(searchProductCell.queryAllByTestId("moreImageButton")).toHaveLength(
+      1
     );
 
-    expect(searchProductGrid.queryAllByTestId("moreImageButton")).toHaveLength(
-      0
+    act(() => {
+      fireEvent.click(searchProductCell.getByTestId("moreImageButton"));
+    });
+
+    expect(searchProductCell.queryAllByRole("img")).toHaveLength(
+      product.additionalImageLink.length + 1
+    );
+
+    expect(scrollIntoViewMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("should not show more image button when product have no additional images", async () => {
+    product = {
+      title: "KIOMI Uhr navy",
+      gtin: "4054789817584",
+      gender: CSVProductGender.Female,
+      salePrice: "14.95 EUR",
+      price: "29.95 EUR",
+      imageLink:
+        "https://mosaic01.ztat.net/vgs/media/large/K4/45/1M/A0/6K/11/K4451MA06-K11@6.jpg",
+      additionalImageLink: [],
+      onSale: true,
+    };
+    searchProductCell = render(<SearchProductCell product={product} />);
+    expect(searchProductCell.queryAllByTestId("moreImageButton")).toHaveLength(
+      1
     );
   });
 });

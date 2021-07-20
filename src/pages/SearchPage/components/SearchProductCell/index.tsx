@@ -82,6 +82,7 @@ const SearchProductCell: FunctionComponent<SearchProductCellProps> = ({
     >
       <div className={classes.imgContainer}>
         <img
+          data-testid="productMainImg"
           loading="lazy"
           alt={product.title}
           src={loadImg ? product.imageLink : "/placeholder.png"}
