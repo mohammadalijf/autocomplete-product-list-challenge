@@ -77,7 +77,8 @@ describe("<SearchProductCell />", () => {
   });
 
   it("should show On Sale Badge when product is on sale", async () => {
-    product = {
+    cleanup();
+    const product = {
       title: "KIOMI Uhr navy",
       gtin: "4054789817584",
       gender: CSVProductGender.Female,
@@ -91,7 +92,7 @@ describe("<SearchProductCell />", () => {
       ],
       onSale: true,
     };
-    searchProductCell = render(<SearchProductCell product={product} />);
+    const searchProductCell = render(<SearchProductCell product={product} />);
     expect(searchProductCell.queryAllByTestId("saleLabel")).toHaveLength(1);
   });
 
@@ -112,7 +113,8 @@ describe("<SearchProductCell />", () => {
   });
 
   it("should not show more image button when product have no additional images", async () => {
-    product = {
+    cleanup();
+    const product = {
       title: "KIOMI Uhr navy",
       gtin: "4054789817584",
       gender: CSVProductGender.Female,
@@ -123,9 +125,9 @@ describe("<SearchProductCell />", () => {
       additionalImageLink: [],
       onSale: true,
     };
-    searchProductCell = render(<SearchProductCell product={product} />);
+    const searchProductCell = render(<SearchProductCell product={product} />);
     expect(searchProductCell.queryAllByTestId("moreImageButton")).toHaveLength(
-      1
+      0
     );
   });
 });
