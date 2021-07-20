@@ -2,7 +2,12 @@
   "name": "autocomplete-product-list-challenge",
   "version": "0.1.0",
   "private": false,
+  "license": "MIT",
+  "repository": "https://github.com/mohammadalijf/autocomplete-product-list-challenge",
   "dependencies": {
+    "@material-ui/core": "^4.12.1",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.1.9",
@@ -10,8 +15,11 @@
     "@types/node": "^16.3.2",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "comlink-loader": "^2.0.0",
+    "papaparse": "^5.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.2",
     "web-vitals": "^2.1.0"
@@ -20,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +48,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.2.6",
+    "cypress": "^7.7.0",
+    "prettier": "2.3.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "comlink-loader*": "<rootDir>/__mocks__/workerMock.ts",
+      "productsAPI": "<rootDir>/__mocks__/productAPIMocks.ts"
+    }
   }
 }

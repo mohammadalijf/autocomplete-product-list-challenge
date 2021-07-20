@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchProductGrid /> renders correctly 1`] = `
+<DocumentFragment>
+  <section
+    class="makeStyles-container-1"
+    data-testid="searchProductGrid"
+  >
+    <article
+      class="makeStyles-container-4"
+      data-testid="productCell"
+    >
+      <div
+        class="makeStyles-imgContainer-8"
+      >
+        <img
+          alt="Weekday THURSDAY Jeans Slim Fit black"
+          class="makeStyles-img-9"
+          data-testid="productMainImg"
+          loading="lazy"
+          src="/placeholder.png"
+        />
+      </div>
+      <h6
+        class="MuiTypography-root makeStyles-titleLabel-5 MuiTypography-body1"
+        data-testid="productTitle"
+      >
+        Weekday THURSDAY Jeans Slim Fit black
+      </h6>
+      <div
+        class="makeStyles-inforContainer-6"
+      >
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            GTIN
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productGTIN"
+          >
+            2001007926858
+          </span>
+        </div>
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            Gender
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productGender"
+          >
+            female
+          </span>
+        </div>
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            Price
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productPrice"
+          >
+            39.95 EUR
+          </span>
+        </div>
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            Sale Price
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productSalePrice"
+          >
+            39.95 EUR
+          </span>
+        </div>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        data-testid="moreImageButton"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          show more images
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </article>
+    <article
+      class="makeStyles-container-4"
+      data-testid="productCell"
+    >
+      <div
+        class="makeStyles-imgContainer-8"
+      >
+        <img
+          alt="Weekday THURSDAY Jeans Slim Fit black"
+          class="makeStyles-img-9"
+          data-testid="productMainImg"
+          loading="lazy"
+          src="/placeholder.png"
+        />
+      </div>
+      <h6
+        class="MuiTypography-root makeStyles-titleLabel-5 MuiTypography-body1"
+        data-testid="productTitle"
+      >
+        Weekday THURSDAY Jeans Slim Fit black
+      </h6>
+      <div
+        class="makeStyles-inforContainer-6"
+      >
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            GTIN
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productGTIN"
+          >
+            2001008772980
+          </span>
+        </div>
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            Gender
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productGender"
+          >
+            female
+          </span>
+        </div>
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            Price
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productPrice"
+          >
+            39.95 EUR
+          </span>
+        </div>
+        <div>
+          <span
+            class="MuiTypography-root makeStyles-infoTitleLabel-7 MuiTypography-caption"
+          >
+            Sale Price
+          </span>
+          <span
+            class="MuiTypography-root MuiTypography-caption"
+            data-testid="productSalePrice"
+          >
+            39.95 EUR
+          </span>
+        </div>
+      </div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary"
+        data-testid="moreImageButton"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          show more images
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </article>
+  </section>
+</DocumentFragment>
+`;
