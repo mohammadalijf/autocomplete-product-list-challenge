@@ -42,7 +42,7 @@ describe("<SearchPage />", () => {
     expect(searchPage.queryAllByTestId("productCell")).toHaveLength(100);
   });
 
-  it("should show pagination", async () => {
+  it("should show pagination with correct page numbers", async () => {
     const searchInput = searchPage.getByTestId("searchInput");
     searchInput.focus();
     await act(async () => {
