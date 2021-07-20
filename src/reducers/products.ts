@@ -4,6 +4,9 @@ import productAPI, {
   ICSVProducts,
 } from "../services/productsAPI";
 
+/**
+ * empty result error for search
+ */
 export class NotFoundProductError extends Error {
   constructor() {
     super("Sorry! we didn't find anything... maybe try for another product?");
@@ -12,14 +15,38 @@ export class NotFoundProductError extends Error {
 }
 
 export interface IProductsState {
+  /**
+   * all the available products
+   */
   products: ICSVProducts[];
+  /**
+   * search results
+   */
   filtered: ICSVProducts[];
+  /**
+   * loading states
+   */
   loading: {
+    /**
+     * fetch product loading
+     */
     products: boolean;
+    /**
+     * search product loading
+     */
     filtered: boolean;
   };
+  /**
+   * error states
+   */
   error: {
+    /**
+     * fetch product error
+     */
     products?: string;
+    /**
+     * search product error
+     */
     filtered?: string;
   };
 }
@@ -43,9 +70,11 @@ export const searchProducts = createAsyncThunk<
   }
 >("products/filter", async (args, thunkAPI) => {
   const { gender, onSale, query } = args;
+  // query is required so escape the rest and return empty result
   if (!query) return [];
   const { products } = (thunkAPI.getState() as { products: IProductsState })
     .products;
+  // no product so escape the rest and return empty result
   if (products.length === 0) return [];
 
   const filtered = await productAPI.searchProducts(
@@ -53,6 +82,7 @@ export const searchProducts = createAsyncThunk<
     { query, gender, onSale },
     thunkAPI.signal
   );
+  // no product found throw new error
   if (filtered.length === 0) {
     throw new NotFoundProductError();
   }

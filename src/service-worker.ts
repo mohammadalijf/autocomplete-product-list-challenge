@@ -71,30 +71,6 @@ registerRoute(
   })
 );
 
-// An example runtime caching route for requests that aren't handled by the
-// precache, in this case same-origin .png requests like those from in public/
-registerRoute(
-  // Add in any other file extensions or routing criteria as needed.
-  ({ url }) =>
-    url.origin === "https://mosaic01.ztat.net" &&
-    (url.pathname.endsWith(".jpg") ||
-      url.pathname.endsWith(".jpeg") ||
-      url.pathname.endsWith(".png") ||
-      url.pathname.endsWith(".webp")),
-  // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
-    cacheName: "product-image",
-    plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 4000 }),
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-    ],
-  })
-);
-
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener("message", (event) => {
@@ -104,3 +80,22 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+// cache for product images
+registerRoute(
+  ({ url }) =>
+    url.origin === "https://mosaic01.ztat.net" &&
+    (url.pathname.endsWith(".jpg") ||
+      url.pathname.endsWith(".jpeg") ||
+      url.pathname.endsWith(".png") ||
+      url.pathname.endsWith(".webp")),
+  new StaleWhileRevalidate({
+    cacheName: "product-image",
+    plugins: [
+      new ExpirationPlugin({ maxEntries: 4000 }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);

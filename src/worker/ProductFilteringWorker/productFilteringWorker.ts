@@ -1,14 +1,15 @@
-import { CSVProductGender, ICSVProducts } from "../../services/productsAPI";
+import { ICSVProducts } from "../../services/productsAPI";
+import { IProductQuery } from "../../services/productsAPI/parameters/IProductQuery";
 
 /**
  * Filters Products base on query on their title or gtin, and gender and onSale
  * @param products initial product sets to apply filters on
- * @param queries query object that may contain query, onSale, gender
+ * @param queries queries used to filter products
  * @returns an array of products that passed the filtering
  */
 export function filterProducts(
   products: ICSVProducts[],
-  queries: { query?: string; gender?: CSVProductGender; onSale?: boolean }
+  queries: IProductQuery
 ) {
   return products.filter((product) => {
     let pass = false;

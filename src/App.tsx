@@ -8,12 +8,17 @@ import { fetchProducts } from "./reducers/products";
 const App: FunctionComponent = (props) => {
   const dispatch = useAppDispatch();
 
+  //#region side effects
+
+  // load products to store
   useEffect(() => {
     const promise = dispatch(fetchProducts());
     return () => {
       promise.abort();
     };
   }, [dispatch]);
+
+  //#endregion
 
   return (
     <>
