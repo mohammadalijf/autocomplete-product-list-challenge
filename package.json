@@ -2,6 +2,8 @@
   "name": "autocomplete-product-list-challenge",
   "version": "0.1.0",
   "private": false,
+  "license": "MIT",
+  "repository": "https://github.com/mohammadalijf/autocomplete-product-list-challenge",
   "dependencies": {
     "@material-ui/core": "^4.12.1",
     "@material-ui/lab": "^4.0.0-alpha.60",
