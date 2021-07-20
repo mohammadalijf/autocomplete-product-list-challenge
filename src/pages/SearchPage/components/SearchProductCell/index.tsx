@@ -145,7 +145,7 @@ const SearchProductCell: FunctionComponent<SearchProductCellProps> = ({
           </Typography>
         </div>
       </div>
-      {product.additionalImageLink.length !== 0 && (
+      {product.additionalImageLink.length > 0 && (
         <Button
           data-testid="moreImageButton"
           variant="outlined"
