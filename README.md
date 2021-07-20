@@ -2,6 +2,18 @@
 
 The general idea of this coding challenge is to implement a basic auto-complete list which will be updated dynamically while the user types in a search box. The result will be comprised of products containing information like title, price and a couple of images.
 
+## Used Packages
+
+- [Create React App](create-react-app.dev): For bootstrapping the react project.
+- [Material-UI](https://material-ui.com/): For Theming and design system.
+- [Redux/Redux Toolkit](https://redux-toolkit.js.org/): For creating store and slices, reducers and action.
+- [PapaParse](https://www.papaparse.com/): For parsing product csv file.
+- [comlink-loader](https://github.com/GoogleChromeLabs/comlink-loader): For creating web worker to do filtering process on background thread and context without ejecting app.
+- [workbox](https://developers.google.com/web/tools/workbox/): For creating service worker and caching system without ejecting app.
+- [Cypress](https://www.cypress.io/): For End-To-End tests.
+- [Jest](https://jestjs.io/): For Unit tests.
+- [Testing Library](https://testing-library.com/): For Test utilities.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -16,13 +28,11 @@ You will also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the unit test runner in the interactive watch mode uding jest.
 
 ### `yarn cypress:open`
 
-Launches the end-to-end test runner in browser
-See [cypress](https://www.cypress.io/) for more information.
+Launches the end-to-end test runner in browser using cypress.
 
 ### `yarn build`
 
@@ -31,8 +41,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Running the production build on HTTPS localhost
 
@@ -56,10 +64,6 @@ service workers are only available in production builds on **HTTPS**. To run app
 
 This projects uses service workers for caching app bundle and product images. if you run app in HTTPS production mode the image cache will to its magic. please refer to [this section](#running-the-production-build-on-https-localhost) on how to run production on localhost using https.
 
-## Learn More
+## Attribution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+cloth placehoder icon made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com)
